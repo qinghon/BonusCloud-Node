@@ -621,6 +621,8 @@ ins_conf(){
 	  ]}' > "$BASE_DIR/compute/10-mynet.conflist"
 
 	printf '{"cniVersion": "0.3.0","type": "loopback"}' > "$BASE_DIR/compute/99-loopback.conf"
+	cp "$BASE_DIR/compute/10-mynet.conflist" /etc/cni/net.d/
+	cp "$BASE_DIR/compute/99-loopback.conf" /etc/cni/net.d/
 }
 
 _set_node_systemd(){
