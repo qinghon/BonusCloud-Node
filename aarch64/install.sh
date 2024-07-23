@@ -496,11 +496,11 @@ _k8s_ins_yum(){
 }
 _k8s_ins_apt(){
 	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
+	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] http://mirrors.tuna.tsinghua.edu.cn/kubernetes/core:/stable:/v1.27/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
 	log "[info]" "installing k8s"
 	apt-get update
 	apt-mark unhold kubelet kubeadm kubernetes-cni
-	apt-get install -y --allow-downgrades kubeadm=1.27.1-1.1
+	apt-get install -y --allow-downgrades kubeadm
 	apt-mark hold kubelet kubeadm kubernetes-cni
 	if [[ $OS == "ubuntu" ]]; then
 	    containerd config default > /etc/containerd/config.toml
